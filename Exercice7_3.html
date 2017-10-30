@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title> Exercice 7_3 </title>
-</head>
-<script>
-    function itt(n) {
-        var tab = [0,1];
-        for(let k=1;k<n-1;k++){
-            var num = tab[k]+tab[k-1];
-            tab.push(num);
+    <head>
+        <title> Exercice 7_3 </title>
+    </head>
+    <script>
+        function itt(n) {
+            var tab = [0,1];
+            for(let k=1;k<n-1;k++){
+                var num = tab[k]+tab[k-1];
+                tab.push(num);
+            }
+            return tab.pop();
         }
-       return tab.pop();
-    }
-    
-    console.log(itt(9));    
-    
-</script>
 
-<body>
+        console.log(itt(9));    // ça marche
+
+        function rec(n){
+            if(n==1){
+                return 0;
+            }
+            if(n==2){
+                return 1;
+            }
+            else{
+
+                return rec(n-1) + rec(n-2);
+            }
+        }
+
+        console.log(rec(6));
+
+    </script>
+
+    <body>
 
 
 
-</body>
+    </body>
 </html>
