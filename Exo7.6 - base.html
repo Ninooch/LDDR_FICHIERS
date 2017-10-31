@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Tableaux</title>
+    <script src='array.js'></script>
+    <script>
+        function $(id){return document.getElementById(id)}
+        
+        
+        function trie(){
+            var x=[].alea(5,0,5)
+            $("span1").innerHTML= "</br>"+"Mon tableau "+"</br>"
+            $("span1").innerHTML+= "["+x +"] "+"</br>"
+            $("span1").innerHTML+="quickSort"+"</br>"
+            $("span1").innerHTML+="["+x.quickSort()  +"] "+"</br>"
+            $("span1").innerHTML+="tri selection"+"</br>"
+            $("span1").innerHTML+="["+x.triSelection()  +"] "+"</br>"
+            $("span1").innerHTML+="tri"+" \340 "+"bulles"+"</br>"
+            $("span1").innerHTML+="["+x.triBulles()  +"] "+"</br>"
+
+        }
+        function dessine(){
+            var x=[].alea(5,0,5)
+            x.dessineMoi('div2')
+        }    
+        function anime(){
+            var x=[].alea(5,0,5)
+            x.animeMoi('div3')
+        }
+        
+        function anime_graphique(){
+            $('span').style.display="inline"
+            var x=[].alea(25,0,25)
+            x.animeMoiGraphique('c6')
+        }
+
+
+        function comparaison(){
+            var nb=5000
+            var x=[].alea(nb,0,nb)
+            var x1=x.slice()
+         
+            var d1=new Date().getMilliseconds()
+            var tR=x.triRapide()
+            var d2=new Date().getMilliseconds()
+            $("div4").innerHTML=" Tri rapide en "+(d2-d1)+" ms"
+            
+            var d3=new Date().getMilliseconds()
+            var tS=x1.triSelection()
+            var d4=new Date().getMilliseconds()
+            $("div4").innerHTML+="</br>"+" Tri selection en "+(d4-d3)+" ms"
+            
+        }
+    </script>
+</head>   
+
+<body>
+    <button onclick="trie()" >Trie mon tableau</button><span id="span1"></span></br>
+    <button onclick="dessine()" >Dessine un tableau</button><div id="div2"></div></br>
+    <button onclick="anime()" >Anime un tableau</button><div id="div3"></div></br>
+    <button onclick="anime_graphique()" >Anime un tableau Graphique</button><span id="span" style="display:none"><canvas id="c6" width="50" height="50" style="border: medium solid rgb(255,0,0)"></canvas><span id="span6bis"></span></span></br></br>
+    <button onclick="comparaison()" >Comparaison</button><div id="div4"></div></br>
+    </body>
+</html>

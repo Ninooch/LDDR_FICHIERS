@@ -1,0 +1,68 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>RECURSIF/Fibonacci</title>
+        <script type="text/javascript">
+            function fibonacciRecursif(n){
+                if((n==1)||(n==2)) return 1
+                else return (fibonacciRecursif(n-1)+fibonacciRecursif(n-2))
+            }
+            function fibonacciIteratif(n){
+                var x=1,y=1,i=2,t
+                while (i<n) {
+                    t=x+y
+                    x=y
+                    y=t
+                    i++
+                }
+                return y
+            }
+            
+            function afficheTableauFibonacci(){                        
+                var tempsR, tempsI, temporaire1, temporaire2
+                var afficherR=[],afficherI=[],fib=[]
+                
+                var min =parseInt(document.getElementById('indiceMin').value)
+                var max=parseInt(document.getElementById('indiceMax').value)
+    
+                for (var j=min; j<max+1; j++) {
+                    var debutR = new Date()   
+                    temporaire1=debutR.getTime()
+                    fib[j]=fibonacciRecursif(j)
+                    var finR =new Date ()
+                    temporaire2= finR.getTime()
+                    tempsR= temporaire2-temporaire1
+                    afficherR[j]=tempsR+" ms"          
+                      
+                    var debutI = new Date()
+                    temporaire1=debutI.getTime()
+                    fib[j]=fibonacciIteratif(j)
+                    var finI =new Date ()
+                    temporaire2=finI.getTime()
+                    tempsI=temporaire2-temporaire1
+                    afficherI[j]=tempsI +" ms"
+               }
+               
+               var x="<table border='1' width='150px' height='150px'>"
+               x=x+"<td>"+"nème terme"+"</td>"+"<td>"+"Temps récursif"+"</td>"+"<td>"+"Temps itératif"+"</td>"+"<td>"+"Fib(n)"+"</td>"
+               for (var i=min;i<max+1;i++){
+                     x=x+"<tr>"
+                     x=x+"<td>"+i+"</td>"+"<td>"+afficherR[i]+"</td>"+"<td>"+afficherI[i]+"</td>"+"<td>"+(fib[i])+"</td>"
+                     x=x+"</tr>"
+               }
+                x=x+"</table>"
+               document.getElementById('resultat').innerHTML=x             
+            }
+        </script>
+    </head>
+    <body>
+    <h1> Fibonacci:temps de calcul pour n à m termes (n < m)</h1> 
+    <h5> nième terme: <input id="indiceMin"/></h5>
+    <h5> mième terme: <input id="indiceMax"/></h5> </br>
+    <button onclick="afficheTableauFibonacci()">affiche tableau de comparaison </button><br>
+    <div id="resultat"/>
+    
+</div>
+</body>
+</html>
