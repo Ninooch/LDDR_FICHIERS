@@ -106,15 +106,20 @@ Array.prototype.triSelection = function(){
 }
 
 Array.prototype.triBulles = function(){
-    while(!//est trié){
-          for(let k=1;k<this.length+1;k++){
-        if(this[k-1]<this[k]){
-            this.echange(k-1,k);
+    do{
+        for(let k=1;k<this.length+1;k++){
+            n=0;
+            if(this[k-1]<this[k]){
+                this.echange(k-1,k);
+                n++;
+            }
         }
     }
+    while(n!=0)
+        return this;
 }
-return this;
-}
+
+
 
 Array.prototype.quickSort = function(){}
 
