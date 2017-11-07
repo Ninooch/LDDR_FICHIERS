@@ -113,6 +113,10 @@ Array.prototype.triBulles = function(){
                 this.echange(k-1,k);
                 n++;
             }
+            if(this[k-1]>this[k]){
+                this.echange(k-1,k);
+                n++;
+            }
         }
     }
     while(n!=0)
