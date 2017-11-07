@@ -90,16 +90,31 @@ Array.prototype.visuel=function(canvas){
 
 Array.prototype.triSelection = function(){
     var array = [];
-    var length = this.length;
-    for(var k = 0; k<length;k++){
-        var max = this.max(true);
-        this.splice(max[1],1);
-        array.push[max[0]];
+    for(k=0;k<this.length;k++){
+        array.push(this[k]);
     }
-    return array;
+    for(var k = 0; k<this.length;k++){
+        var max = array.max(true);
+        array.splice(max[1],1);
+        for(let l=0;l<this.length;l++){
+            if(max[0] == this[l]){
+                this.echange(l,this.length-1-k);
+            }
+        }
+    }
+    return this;
 }
 
-Array.prototype.triBulles = function(){}
+Array.prototype.triBulles = function(){
+    while(!//est trié){
+          for(let k=1;k<this.length+1;k++){
+        if(this[k-1]<this[k]){
+            this.echange(k-1,k);
+        }
+    }
+}
+return this;
+}
 
 Array.prototype.quickSort = function(){}
 
