@@ -1,11 +1,11 @@
 //****************************************************************
-// Ajout de  mŽthodes ˆ l'objet Array
+// Ajout de  méthodes à l'objet Array
 // (a) Array.prototype.supprime=function(i) retourne un tableau sans l'indice i
-// (b) Array.prototype.echange=function(i,j) retourne un tableau avec un Žchange entre les indices i et j
+// (b) Array.prototype.echange=function(i,j) retourne un tableau avec un échange entre les indices i et j
 // (c) Array.prototype.alea=function(t,min,max)retourne un tableau. La taille du tableau est t.Le contenu des cellules sont des entiers entre min et max
 // (d) Array.prototype.max=function() retourne le plus graand nombre d'un tableau.
-// (e) Array.prototype.mode=function() retourne le plus nombre le plus souvent prŽsent dans le tableau.
-// (f) Array.prototype.visuel=function(canvas) dessine dans la balis d'id canvas un ensemble de points (indice;tab[indice]) qui reprŽsente les ŽlŽments du tableau.
+// (e) Array.prototype.mode=function() retourne le plus nombre le plus souvent présent dans le tableau.
+// (f) Array.prototype.visuel=function(canvas) dessine dans la balis d'id canvas un ensemble de points (indice;tab[indice]) qui représente les éléments du tableau.
 //****************************************************************               
 
 Array.prototype.supprime=function(ind) {
@@ -106,13 +106,10 @@ Array.prototype.triSelection = function(){
 }
 
 Array.prototype.triBulles = function(){
+    var n;
     do{
+        n=0;
         for(let k=1;k<this.length+1;k++){
-            n=0;
-            if(this[k-1]<this[k]){
-                this.echange(k-1,k);
-                n++;
-            }
             if(this[k-1]>this[k]){
                 this.echange(k-1,k);
                 n++;
@@ -124,8 +121,48 @@ Array.prototype.triBulles = function(){
 }
 
 
+ var steps = [];
+Array.prototype.quickSort = function(){
+   
+    
+    if (this.length < 2) {
+            return this;
+    }
+    else{
+        var pIndex = Math.floor(this.length/2);
+        var pivot = this[pIndex];
+        this.splice(pIndex,1); //merci Niels
+        var lesser = [];
+        var greater = [];
+        for(k=0;k<this.length;k++){
+            if (this[k]<pivot) {
+                lesser.push(this[k]);
+            }
+            else{
+                greater.push(this[k]);
+            }
+        }
+        steps.push(lesser.concat(pivot,greater));
+       return lesser.quickSort().concat(pivot,greater.quickSort());
+        
+    }
+}
 
-Array.prototype.quickSort = function(){}
+Array.prototype.dessineMoi = function(maDiv){
+    var str = '<table style="border:solid black 1px;"><tr>'
+    for(let k=0;k<this.length;k++){
+        str += "<td>" + this[k] + "</td>";
+    }
+    str += '</tr></table>'
+   var div =  document.getElementById(maDiv);
+   div.innerHTML = str;
+}
+
+Array.prototype.animeMoi = function(maDiv){
+    
+}
+
+
 
 
 
