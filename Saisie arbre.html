@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+</head>
+<style>
+    td{
+        border: 1px solid black;
+        text-align: center;
+        font-size: 1.5em;
+        width: 30px;
+    }
+    input{
+        text-align: center;
+        font-size: 2em;
+        width: 80px;
+        background-color: lightGrey
+    }
+    button{
+        width:250px;
+        font-size:1em;
+        height: 30px;
+    }
+    div{
+        text-align: center;
+        font-size: 2em;
+        background-color: lightGrey;
+    }
+</style>
+<script>
+    var arbre=[]
+    var out=[]
+    function storeTree() {
+        document.getElementById("chaine").value=""
+        for (var k=0;k<=14;k++) {
+            if (document.getElementById("i"+k).value!=""){
+                arbre[k]=document.getElementById("i"+k).value}
+            else {
+                arbre[k]=null}
+        }
+        // Pour supprimer les derniers éléments "undefined"
+        while (arbre[arbre.length-1]==null){
+            arbre.pop()
+        }
+        document.getElementById("out").innerHTML=arbre
+    }
+    function imax(){
+        let i=15
+        do{
+            i=i-1
+        }while(arbre[i]==null)
+        return i
+    }
+    function fils_g(x) {
+      if(x<=imax()) return 2*x+1
+        else return null
+    }
+    function fils_d(x){
+    if(x<=imax()) return 2*x+2
+        else return null
+    }
+    function pere(x) {
+        return Math.floor((x-1)/2)
+    }
+    function estArbre(tab) {
+        var aux=true
+        if (tab[0]==null || tab[0]=="") {
+            return false
+        }
+        else
+        {
+            for (let k=1;k<tab.length;k++) {
+                if (tab[k]!=null) {
+                    if (tab[pere(k)]==null) {aux=false}
+                }
+            }
+        }
+        return aux
+    }
+    function drawTree() {
+        document.getElementById("out").innerHTML=""
+        for (let k=0;k<=14;k++) {
+            document.getElementById("i"+k).value=""}
+            
+        arbre=document.getElementById("chaine").value.split(",")
+        
+        if (estArbre(arbre)==false) {
+            alert("CE N'EST PAS UN ARBRE")
+        }
+        for (let k=0;k<arbre.length;k++){
+                document.getElementById("i"+k).value=arbre[k]
+                if (arbre[k]==""){arbre[k]=null}
+        }
+    }
+    function feuille(x) {
+        return (arbre[fils_g(x)]==null && arbre[fils_d(x)]==null ) 
+    }
+function parcoursLargeur() {
+    for (k=0;k<arbre.length;k++){
+        if (arbre[k]!="" && arbre[k]!=null) {out.push(arbre[k])}
+        }
+}
+function parcoursPrefixe(pos){
+            out.push(arbre[pos])    
+            var gauche=fils_g(pos)
+            if(arbre[gauche]!=null){
+                parcoursPrefixe(gauche)
+            }
+            var droite=fils_d(pos)
+            if(arbre[droite]!=null){
+                parcoursPrefixe(droite)
+            }
+        }
+function parcoursInfixe(pos){
+            var gauche=fils_g(pos)
+            if(arbre[gauche]!=null){
+                parcoursInfixe(gauche)
+            }
+            out.push(arbre[pos])
+            var droite=fils_d(pos)
+            if(arbre[droite]!=null){
+                parcoursInfixe(droite)
+            }
+        }
+        
+function parcoursSuffixe(pos){   
+            var gauche=fils_g(pos)
+            if(arbre[gauche]!=null){
+                parcoursSuffixe(gauche)
+            }
+            var droite=fils_d(pos)
+            if(arbre[droite]!=null){
+                parcoursSuffixe(droite)
+            }
+            out.push(arbre[pos]) 
+        } 
+</script>
+<body>
+<button onclick="storeTree()"> STOCKER TABLEAU</button>
+<br>
+<p> RESULTAT : </p>  <div id="out"> </div><br>
+<button onclick="drawTree()"> DESSINER ARBRE : </button>  <input id="chaine" value="1,2,3,4" style="width:400px"><br>
+<button onclick="out=[];parcoursLargeur(0);document.getElementById('out').innerHTML=out"> Parcours largeur</button>
+<button onclick="out=[];parcoursPrefixe(0);document.getElementById('out').innerHTML=out"> Parcours profondeur prefixé</button>
+<button onclick="out=[];parcoursInfixe(0);document.getElementById('out').innerHTML=out"> Parcours profondeur infixé</button>
+<button onclick="out=[];parcoursSuffixe(0);document.getElementById('out').innerHTML=out"> Parcours profondeur suffixé</button>
+
+<table style="width:100%;border:1px solid black;" >
+  <tr >
+    <td colspan=8> <input id="i0" value="0"/> </td>  
+  </tr>
+   <tr >
+    <td colspan=4><input id="i1" value="1"/> </td>  <td colspan=4> <input id="i2" value="2"/></td> 
+  </tr>
+<tr>
+    <td colspan=2> <input id="i3" value="3"/></td>  <td colspan=2><input id="i4" value="4"/> </td>
+    <td colspan=2> <input id="i5" value="5"/></td>  <td colspan=2> <input id="i6" value="6"/></td>
+  </tr>
+      <tr>
+    <td><input id="i7" value="7"/> </td>  <td><input id="i8" value="8"/> </td>
+    <td><input id="i9" value="9"/> </td>  <td><input id="i10" value="10"/> </td>
+    <td> <input id="i11" value="11"/></td>  <td><input id="i12" value="12"/> </td>
+    <td><input id="i13" value="13"/> </td>  <td><input id="i14" value="14"/> </td>
+  </tr>
+</table>
+
+</body>
+</html>
