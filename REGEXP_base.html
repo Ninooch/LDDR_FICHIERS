@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+<meta charset="utf-8">
+<head>
+    <title>REGEXP</title>
+</head>
+<style>
+#res{
+height:30px;
+background-color:lightGrey;}
+button{
+width:300px;}
+</style>
+<body>
+<script>
+function $(arg){
+    return document.getElementById(arg)
+}
+function test(){
+    
+}
+function remplacer(){
+    
+}
+function indices(){
+    
+}
+</script>
+<table border="1px solid black">
+<tr>
+<td>TEXTE : </td><td>	<input id="text" value="En route Messieurs !"/> </td>
+</tr>
+<tr>
+<td> REGEXP : </td>
+<td> <input id="r1" value="e"   />	</td>
+</tr>
+<tr>
+<td> MODIFICATEURS ig :  </td>
+<td>	<input id="r2" value="g"  />  </td>
+</tr>
+<tr>
+<td colspan=2> <button onclick="test()"> TESTER REGEXP </button>  </td>
+</tr>
+<tr>
+<td> REMPLACER PAR :  </td>
+<td> <input id="r3" value="*e*"/> 	 </td>
+</tr>
+<tr>
+<td colspan=2> <button onclick="remplacer()"> REMPLACER </button> </td>
+</tr>
+<tr>
+<td colspan=2> <button onclick="indices()"> LISTE DES INDICES (si "g")</button> </td>
+</tr>
+<tr>
+<td colspan=2>  RESULTAT </td>
+</tr>
+<tr>
+<td colspan=2>  <div id="res"/> </td>
+</tr>
+</table>
+</body>
+</html>
