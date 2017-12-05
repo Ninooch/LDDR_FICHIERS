@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+    
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>regExp/exemple1</title>
+        <style type="text/css">
+            body:{font-size:20pt}
+        </style>
+        
+        <script type="text/javascript">
+            var txt_courant=""
+            var txt_reg=""
+            var res=""
+            function execute () {
+                var txt=document.getElementById('in').value
+                var re=document.getElementById('re').value
+                var gi=document.getElementsByName('mod')
+                var gi_txt=""
+                var gi=document.getElementsByName('mod')
+                for(var i=0;i<gi.length;i++){
+                    if(gi[i].checked){
+                        gi_txt+=gi[i].value
+                    }
+                }
+                var reg=new RegExp(re,gi_txt)
+                document.getElementById('re_params0').innerHTML=reg
+                document.getElementById('re_params1').innerHTML=reg
+                document.getElementById('re_params2').innerHTML=reg
+                document.getElementById('re_params3').innerHTML=reg+",AAA"
+                document.getElementById('match').innerHTML=txt.match(reg)
+                document.getElementById('search').innerHTML=txt.search(reg)
+                document.getElementById('replace').innerHTML=txt.replace(reg,"AAA")
+                document.getElementById('test').innerHTML=reg.test(txt)
+                
+              
+                
+                
+                document.getElementById('txt_params').innerHTML=txt
+                if(gi[0].checked){
+                    document.getElementById('res').innerHTML=global_rec(txt,reg)
+                }
+                else{
+                    document.getElementById('res').innerHTML=rec(txt,reg)
+                }
+            }
+            function global_rec(txt,reg){
+                if(txt.match(reg)){
+                    var trouve=-1
+                    for(var i=0;i<txt.match(reg).length;i++){
+                        if(txt.match(reg)[i].length>0){
+                            trouve=i
+                            break
+                        }
+                    }
+                    if(trouve>-1){
+                        var pa=txt.match(reg)[trouve]
+                        return txt.substring(0, txt.search(pa))+"<font color='red'>"+pa+"</font>"
+                        +
+                        global_rec(txt.substring(txt.search(pa)+pa.length),reg)
+                    }else{
+                        return txt
+                    }
+                }else
+                return txt
+            }
+            function rec(txt,reg){
+                if(reg.test(txt))
+                return txt.replace(reg,"<font color='red'>"+txt.match(reg)[0]+"</font>")
+                else
+                return txt
+            }
+        </script>
+    </head><body>
+        <h1>Expressions régulières:</h1>
+        Motif:<input value="^a" id="re"><br>
+        Modificateur:<input name="mod" value="g" type="checkbox">g <input checked="checked" name="mod" value="i" type="checkbox">i<br>
+                Texte:<input value="Aasdas" id="in" onkeypress="setTimeout(execute,0)">
+                <h2>Résultat: <span id="res"><font color="red">A</font>asdas</span></h2>
+                var texte= <span id="txt_params">Aasdas</span><br>
+                var regExp=<span id="re_params0">/^a/i</span><br>
+                <h3>Méthodes de l'objet String</h3>
+                <p> <span id="txt_params">texte</span>.match(<span id="re_params1">/^a/i</span>)=<span id="match">A</span>
+                </p>
+                <p> <span id="txt_params">texte</span>.search(<span id="re_params2">/^a/i</span>)=<span id="search">0</span>
+                </p>
+                <p> <span id="txt_params">texte</span>.replace(<span id="re_params3">/^a/i,AAA</span>)=<span id="replace">AAAasdas</span>
+                </p>
+                <h3>Méthodes de l'objet RegExp</h3>
+                <p> regExp.test(texte)=<span id="test">true</span>
+                </p> 
+                <h3>Liens</h3> 
+                <a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">RegExp sur W3 school</a></br>
+                <a href="https://openclassrooms.com/courses/dynamisez-vos-sites-web-avec-javascript/les-expressions-regulieres-1-2">RegExp sur openclassrooms</a> 
+            </body></html>

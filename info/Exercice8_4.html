@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>8.4</title>
+</head>
+
+<body>
+<script>
+    var arbre = [20,5,25,3,12,21,28,null,null,8,13,null,null,null,null,null,null,null,null,6];
+    var t = prompt("Un arbre","A,B,C,D").split(",");
+    //alert(t[0]==null);
+    for(let k in t){
+        if (t[k] == "") {
+            t[k] == undefined;
+        }
+    }
+        function g(i) {
+            return 2*i +1;
+        }
+        function d(i) {
+            return 2*i +2;
+        }
+        
+        function feuille(k) {
+            if (arbre[g(k)] == null && arbre[d(k)] == null) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        var out = [];
+        function prefixe(k) {
+            // k = indice de la racine de l'arbre ou sous arbre.
+            if (arbre[k] != null) {
+                out.push(arbre[k]);
+                prefixe(g(k));
+                prefixe(d(k));
+            }  
+        }
+        //prefixe(0);
+        //console.log(out);
+        
+        function infixe(k) {
+             if (arbre[k] != null) {
+                infixe(g(k));
+                out.push(arbre[k]);
+                infixe(d(k));
+            }  
+        }
+        
+        function suffixe(k) {
+             if (arbre[k] != null) {
+                suffixe(g(k));
+                suffixe(d(k));
+                out.push(arbre[k]);     
+            }  
+        }
+        suffixe(0);
+        console.log(out);
+        
+        
+        function analyse() {
+            var noeuds = 0;
+            var feuilles = 0;
+            for(let k=0;k<arbre.length;k++){
+                if (arbre[k]!= null) {
+                    noeuds ++;
+                }
+                if (feuille(k)) {
+                    feuilles++;
+                }
+            }
+            return [noeuds,feuilles];
+        }
+      
+        console.log(analyse());
+        
+    </script>
+    <button> ANALYSE </button>
+</body>
+</html>
