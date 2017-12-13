@@ -52,9 +52,27 @@ pi = 4 * Atn(1)
 x = 400 * Rnd - 200: y = 400 * Rnd
 Randomize
 
+'angle
+Let angle = pi / 180
 ' changement de coordonnée :
 Let mx = 420 / 400
 Let hx = 210
+
+'a1 , vert
+nx = Cos(-3 * angle) * 0.85 * x - Sin(-3 * angle) * 0.85 * y
+ny = Sin(-3 * angle) * 0.85 * x + Cos(-3 * angle) * 0.85 * y + (y / 100) * 15
+
+'a2, rouge
+nx = Cos(45 * angle) * 0.3 * x - Sin(45 * angle) * 0.3 * y
+ny = Sin(45 * angle) * 0.3 * x + Cos(45 * angle) * 0.3 * y + (200 / 100) * 15
+
+'a3 , bleu
+nx = Cos(-50 * angle) * 0.3 * -x - Sin(-50 * angle) * 0.3 * y
+ny = Sin(-50 * angle) * 0.3 * -x + Cos(-50 * angle) * 0.3 * y + (200 / 100) * 7.5
+
+'a4
+nx = 0.001 * x
+ny = 0.15 * y
 
 
 For k = 1 To 100000
